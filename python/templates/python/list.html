@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Python Info List{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Python Information</h1>
+    <div class="mb-3">
+        <form method="get" class="input-group">
+            <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search...">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    {% if python_infos %}
+        {% for info in python_infos %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ info.title }}</h5>
+                    <p class="card-text">{{ info.description }}</p>
+                    <p class="card-text text-muted">By: {{ info.created_by.username }} | Created: {{ info.created_at }}</p>
+                    <a href="{% url 'python_update' info.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'python_delete' info.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No Python info available.</p>
+        {% endfor %}
+    {% else %}
+        <p class="text-center">No Python info available.</p>
+    {% endif %}
+{% endblock %}

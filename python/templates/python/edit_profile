@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Edit Profile</h1>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_first_name" class="form-label">First Name:</label>
+            <input type="text" name="first_name" id="id_first_name" value="{{ user.first_name }}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="id_last_name" class="form-label">Last Name:</label>
+            <input type="text" name="last_name" id="id_last_name" value="{{ user.last_name }}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email:</label>
+            <input type="email" name="email" id="id_email" value="{{ user.email }}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'profile_view' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}
